@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  cladding_bot:
+    image: calc_bot:latest
+    container_name: cladding_bot
+    restart: unless-stopped
