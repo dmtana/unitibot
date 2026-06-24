@@ -5,7 +5,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import CommandStart
 
-from BOT_TOKEN import TOKEN
+from data.BOT_TOKEN import TOKEN
 
 
 # TOKEN = os.getenv("BOT_TOKEN")

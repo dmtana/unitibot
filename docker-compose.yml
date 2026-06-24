@@ -5,3 +5,5 @@ services:
     image: calc_bot:latest
     container_name: cladding_bot
     restart: unless-stopped
+    volumes:
+      - ./data:/app/data
