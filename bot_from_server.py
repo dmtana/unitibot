@@ -22,7 +22,7 @@ bot = Bot(TOKEN)
 dp = Dispatcher()
 
 
-def calculate_positions(panel_width: int, amount_of_cladding: int) -> str:
+async def calculate_positions(panel_width: int, amount_of_cladding: int) -> str:
     half = panel_width / 2 - cladding_gap / 2
     first_position = half - ((amount_of_cladding / 2) - 1) * cladding_section
 
@@ -47,13 +47,14 @@ async def start(message: Message):
         "1452 5"
     )
 
-
+# TODO #1
+#   make multithreading for the calculation function
 @dp.message()
 async def calc(message: Message):
     try:
         panel_width, amount_of_cladding = map(int, message.text.split())
 
-        result = calculate_positions(panel_width, amount_of_cladding)
+        result = await calculate_positions(panel_width, amount_of_cladding)
 
         await message.answer(result)
 
