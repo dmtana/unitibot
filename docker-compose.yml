@@ -6,4 +6,4 @@ services:
     container_name: cladding_bot
     restart: unless-stopped
     volumes:
-      - ./data:/app/unitibot/unitibot/data
+      - ./data:/app/unitibot/data

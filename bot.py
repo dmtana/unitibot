@@ -16,10 +16,10 @@ if not TOKEN:
 
 # GLOBAL PARAMETERS
 
-cladding_section = 308.66
-# cladding_section = 307
+# cladding_section = 308.66
+cladding_section = 307
 # cladding_gap = 15
-cladding_gap = 16
+cladding_gap = 15
 
 bot = Bot(TOKEN)
 dp = Dispatcher()
@@ -31,12 +31,12 @@ async def calculate_positions(panel_width: int, amount_of_cladding: int) -> str:
 
     lines = []
 
-    lines.append(f"Gap: {cladding_gap} mm\n Cladding Section: {cladding_section} mm")
+    lines.append(f"Gap: {cladding_gap} mm\nCladding Section: {cladding_section} mm\n")
 
     lines.append(f"First piece from cladding to plenum: ({int(first_position)})")
 
     for i in range(amount_of_cladding - 1):
-        value = int(panel_width - (first_position + cladding_section * i))
+        value = round(panel_width - (first_position + cladding_section * i))
         lines.append(str(value))
 
     lines.append(f"last piece from plenum to cladding: ({int(first_position)})")
