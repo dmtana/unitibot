@@ -16,10 +16,8 @@ if not TOKEN:
 
 # GLOBAL PARAMETERS
 
-# cladding_section = 308.66
-cladding_section = 307
-# cladding_gap = 15
-cladding_gap = 15
+cladding_section = 306
+cladding_gap = 14
 
 bot = Bot(TOKEN)
 dp = Dispatcher()
