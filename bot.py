@@ -16,7 +16,7 @@ if not TOKEN:
 
 # GLOBAL PARAMETERS
 
-cladding_section = 306
+cladding_section = 306.33
 cladding_gap = 14
 
 bot = Bot(TOKEN)
