@@ -15,7 +15,7 @@ if not TOKEN:
     raise ValueError("BOT_TOKEN is not set")
 
 # GLOBAL PARAMETERS
-
+ 
 cladding_section = 306.33
 cladding_gap = 14
 
