@@ -29,9 +29,10 @@ async def calculate_positions(panel_width: int, amount_of_cladding: int) -> str:
 
     lines = []
 
-    lines.append(f"Gap: {cladding_gap} mm\nCladding Section: {cladding_section} mm\n")
+    lines.append(f"<b>Gap: {cladding_gap} mm\nCladding Section: {cladding_section} mm\n</b>")
 
-    lines.append(f"First piece from cladding to plenum: ({int(first_position)})")
+    lines.append(f"First and last piece length: <b>{round(first_position-12)}</b>")
+    lines.append(f"First piece from cladding to plenum: <b>({int(first_position)})</b>")
 
     for i in range(amount_of_cladding - 1):
         value = round(panel_width - (first_position + cladding_section * i))
