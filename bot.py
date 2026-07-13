@@ -19,7 +19,6 @@ if not TOKEN:
 cladding_section = 306.33
 cladding_gap = 14
 
-bot = Bot(TOKEN)
 dp = Dispatcher()
 
 
@@ -31,14 +30,12 @@ async def calculate_positions(panel_width: int, amount_of_cladding: int) -> str:
 
     lines.append(f"<b>Gap: {cladding_gap} mm\nCladding Section: {cladding_section} mm\n</b>")
 
-    lines.append(f"First and last piece length: <b>{round(first_position-12)}</b>")
+    lines.append(f"First and last piece cut length: <b>{round(first_position-12)}</b>")
     lines.append(f"First piece from cladding to plenum: <b>({int(first_position)})</b>")
 
     for i in range(amount_of_cladding - 1):
         value = round(panel_width - (first_position + cladding_section * i))
         lines.append(str(value))
-
-    lines.append(f"last piece from plenum to cladding: ({int(first_position)})")
 
     return "\n".join(lines)
 
@@ -113,7 +110,16 @@ async def calc(message: Message):
 
 
 async def main():
-    await dp.start_polling(bot)
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s) .%(funcName)s(%(lineno)d) - %(message)s")
+    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
+
+    # BOT STARTED
+    try:
+        await dp.start_polling(bot)
+    except Exception as ex:
+        print(f'[ERROR IN START FILE] {ex}')
+    finally:
+        await bot.session.close()
 
 
 if __name__ == "__main__":
