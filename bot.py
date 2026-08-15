@@ -33,7 +33,7 @@ async def calculate_positions(panel_width: int, amount_of_cladding: int) -> str:
     lines.append(f"It works only for symmetrical cladding! ")
     lines.append(f"First and last piece cut length: <b>{round(first_position-12)}</b>")
     lines.append(f"First piece from cladding to plenum: <b>({int(first_position)})</b>")
-    lines.append(f"From cladding to Joggle Cleat (JOG): ({int(first_position-73)})")
+    lines.append(f"From cladding to Joggle Cleat (JOG): <b>({int(first_position-73)})</b>")
 
     for i in range(amount_of_cladding - 1):
         value = round(panel_width - (first_position + cladding_section * i))
