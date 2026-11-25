@@ -158,7 +158,7 @@ async def main():
     # Start cleanup task
     cleanup_task = asyncio.create_task(
         cleanup_photos(
-            folder="/app/unitibot/photos",
+            folder="photos",
             max_age=3600,
             interval=300
         )
