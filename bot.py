@@ -10,6 +10,8 @@ from aiogram.types import FSInputFile, Message
 from src.bellara_scanner import scan
 from src.bellara_calc import calc_
 
+from src.cleanup import cleanup_photos
+
 router = Router()
 
 from data.BOT_TOKEN import TOKEN
@@ -153,12 +155,23 @@ async def main():
 
     dp.include_router(router)
 
+    # Start cleanup task
+    cleanup_task = asyncio.create_task(
+        cleanup_photos(
+            folder="/app/unitibot/photos",
+            max_age=3600,
+            interval=300
+        )
+    )
+
     try:
         await dp.start_polling(bot)
-    except Exception as ex:
-        print(f"[ERROR IN START FILE] {ex}")
     finally:
-        await bot.session.close()
+        cleanup_task.cancel()
+        await asyncio.gather(
+            cleanup_task,
+            return_exceptions=True
+    )
 
 
 if __name__ == "__main__":
