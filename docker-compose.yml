@@ -1,9 +1,39 @@
-version: '3.8'
+# version: '3.8'
+
+# services:
+#   cladding_bot:
+#     image: calc_bot:latest
+#     container_name: cladding_bot
+#     restart: unless-stopped
+#     volumes:
+#       - ./data:/app/unitibot/data
 
 services:
-  cladding_bot:
-    image: calc_bot:latest
-    container_name: cladding_bot
+
+  bot:
+    build: .
+    image: unitibot:latest
+    container_name: unitibot_bot
     restart: unless-stopped
-    volumes:
-      - ./data:/app/unitibot/data
+
+    command: ["bash", "/app/unitibot/script.sh"]
+
+  web:
+    image: unitibot:latest
+    container_name: unitibot_web
+    restart: unless-stopped
+
+    working_dir: /app/unitibot
+
+    command:
+      - python
+      - -m
+      - streamlit
+      - run
+      - web.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+      - --server.headless=true
+
+    ports:
+      - "127.0.0.1:8501:8501"

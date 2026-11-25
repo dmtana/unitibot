@@ -7,15 +7,10 @@ from aiogram.client.bot import DefaultBotProperties
 from aiogram.filters import CommandStart
 from aiogram.types import FSInputFile, Message
 
-from aiogram import Bot, F, Router
-from aiogram.types import Message, FSInputFile
-
 from src.bellara_scanner import scan
 from src.bellara_calc import calc_
 
 router = Router()
-
-
 
 from data.BOT_TOKEN import TOKEN
 
@@ -36,7 +31,7 @@ S = 93  -adjustment
 M = 135 -adjustment
 L = 199 -adjustment
 first_piece = 157
-# sample_line     = 'MSMLMMSLMLLSMLMLSML'
+# sample_line     = 'LMSMLMMSLMLLSMLMLSML'
 c = 0
 
 
