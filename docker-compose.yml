@@ -1,31 +1,21 @@
-version: '3.8'
-
-# services:
-#   cladding_bot:
-#     image: calc_bot:latest
-#     container_name: cladding_bot
-#     restart: unless-stopped
-#     volumes:
-#       - ./data:/app/unitibot/data
-
 services:
-
   bot:
-    build: .
-    image: unitibot:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: calc_bot:latest
     container_name: unitibot_bot
     restart: unless-stopped
+    working_dir: /app/unitibot
     volumes:
-      - ./data:/app/data
-    command: ["bash", "/app/unitibot/script.sh"]
+      - ./data/BOT_TOKEN.py:/app/unitibot/data/BOT_TOKEN.py:ro
+    command: ["bash", "/usr/local/bin/unitibot-start.sh"]
 
   web:
-    image: unitibot:latest
+    image: calc_bot:latest
     container_name: unitibot_web
     restart: unless-stopped
-
     working_dir: /app/unitibot
-
     command:
       - python
       - -m
@@ -35,6 +25,7 @@ services:
       - --server.address=0.0.0.0
       - --server.port=8501
       - --server.headless=true
-
     ports:
       - "127.0.0.1:8501:8501"
+    environment:
+      STREAMLIT_BROWSER_GATHER_USAGE_STATS: "false"
