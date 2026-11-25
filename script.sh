@@ -1,5 +1,4 @@
-# TODO 
-# create script after bot start 
+#!/bin/bash
 cd /app/unitibot/
-git pull 
+git pull
 python3 bot.py
