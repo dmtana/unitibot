@@ -4,6 +4,8 @@ from pathlib import Path
 
 import streamlit as st
 from src.bellara_scanner import scan
+from src.bellara_scanner import lines_for_scanning
+from src.bellara_calc import calc_
 
 st.set_page_config(page_title='Bellara Scanner', page_icon='📐', layout='wide')
 st.title('Bellara Scanner')
@@ -44,6 +46,7 @@ if uploaded_file is not None:
 
     if st.button('Scan image', type='primary', use_container_width=True):
         try:
+
             with st.spinner('Processing image...'):
                 with tempfile.TemporaryDirectory() as temp:
                     suffix = Path(uploaded_file.name).suffix.lower()
@@ -81,7 +84,20 @@ if uploaded_file is not None and 'result' in st.session_state:
 
     st.subheader('Detected sequence')
     st.code(sequence, language=None)
-    st.caption(f"Valid scan lines: {result['scan_lines']}/19")
+    st.caption(f"Valid scan lines: {result['scan_lines']}/{lines_for_scanning}")
+
+    st.subheader("Calculated measurements")
+
+    if panel_width > 0 and "?" not in sequence:
+        try:
+            measurements = calc_(sequence, panel_width)
+
+            st.code(measurements, language=None)
+
+        except Exception as e:
+            st.error(f"Calculation error: {e}")
+    else:
+        st.warning("Check panel width and detected sequence.")
 
     if '?' in sequence:
         st.warning('Some panels require manual confirmation.')
