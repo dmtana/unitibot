@@ -1,4 +1,4 @@
-# version: '3.8'
+version: '3.8'
 
 # services:
 #   cladding_bot:
@@ -15,7 +15,8 @@ services:
     image: unitibot:latest
     container_name: unitibot_bot
     restart: unless-stopped
-
+    volumes:
+      - ./data:/app/data
     command: ["bash", "/app/unitibot/script.sh"]
 
   web:
